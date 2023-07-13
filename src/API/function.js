@@ -2,9 +2,10 @@ import makeApiCall from "./BaseAPI";
 
 const { REACT_APP_BASE_URL } = process.env;
 
-export const sendMessageNotification = async (message) => {
+export const sendMessageNotification = async (message,selectedUserID) => {
   let data = new FormData();
   data.append("interest", "hello");
+  data.append("user_ids", [selectedUserID]);
   data.append("title", "hello");
   data.append("body", message);
   data.append("my_channel", "my_channel");
@@ -15,4 +16,13 @@ export const sendMessageNotification = async (message) => {
 
   const url = "https://kwipo.onrender.com/notify/";
   return await makeApiCall("post", url, data, {});
+};
+
+
+export const getUsers = async () => {
+
+ 
+
+  const url = 'https://kwipo.onrender.com/listuser/';
+  return await makeApiCall("get", url);
 };
