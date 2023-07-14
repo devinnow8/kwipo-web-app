@@ -73,7 +73,7 @@ const SignUp = () => {
             />
           </Form.Item>
           <Form.Item wrapperCol={{ offset: 6, span: 16 }}>
-            <Button type="primary" htmlType="submit">
+            <Button type="primary" htmlType="submit" className="signUp-button">
               Sign Up
             </Button>
           </Form.Item>

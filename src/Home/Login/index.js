@@ -72,7 +72,7 @@ console.log("newUser", newUser);
         </Form.Item>
         <Form.Item>
           <Button type="primary" htmlType="submit" className="login-form-button">
-            Log in
+            Sign-in
           </Button>
           
           Or <a href="http://localhost:3000/signUp">register now!</a>
