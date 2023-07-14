@@ -1,21 +1,24 @@
 
 import React, { useState } from 'react';
 import './index.css'; 
-import { Form, Input, Button, Checkbox } from 'antd';
+import { Form, Input, Button, Checkbox,Image } from 'antd';
 import { UserOutlined, MailOutlined, LockOutlined } from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';
-import { newUsersDetails } from '../../API/function';
-import loginImage from "./sign-signin-ca50f83d2f.png"
+import { loginUsersDetails } from '../../API/function';
+import signInImage from "./sign-signin-ca50f83d2f.png"
 
 const Login = () => {
   const [form] = Form.useForm();
   const navigate = useNavigate();
-  const [newUser, setNewUser] = useState({ name: '', email: '', password: '' });
+  const [newUser, setNewUser] = useState({  email: '', password: '' });
 
   const handleSubmit = () => {
     navigate('/main');
-    newUsersDetails(newUser);
+    
+    loginUsersDetails(newUser);
+    
   };
+console.log("newUser", newUser);
 
   const handleUserData = (e) => {
     const { name, value } = e.target;
@@ -28,20 +31,12 @@ const Login = () => {
   return (
     <div className="form">
        <div className="login-image">
-        <Image src={loginImage} alt="Login" />
+       <Image src={signInImage} alt="Sign In" />
       </div>
+     
+      <div className='login-container'>
       <Form form={form} onFinish={handleSubmit} className="login-form">
-        <Form.Item
-          name="name"
-          rules={[{ required: true, message: 'Please input your username!' }]}
-        >
-          <Input
-            prefix={<UserOutlined style={{ color: 'rgba(0,0,0,.25)' }} />}
-            placeholder="Username"
-            value={newUser.name}
-            onChange={handleUserData}
-          />
-        </Form.Item>
+    
         <Form.Item
           name="email"
           rules={[{ required: true, message: 'Please input your email!' }]}
@@ -49,6 +44,7 @@ const Login = () => {
           <Input
             prefix={<MailOutlined style={{ color: 'rgba(0,0,0,.25)' }} />}
             placeholder="Email"
+            name='email'
             value={newUser.email}
             onChange={handleUserData}
           />
@@ -60,9 +56,10 @@ const Login = () => {
           <Input.Password
             prefix={<LockOutlined style={{ color: 'rgba(0,0,0,.25)' }} />}
             placeholder="Password"
+            name='password'
             value={newUser.password}
             onChange={handleUserData}
-            size='small'
+           
           />
         </Form.Item>
         <Form.Item>
@@ -77,9 +74,12 @@ const Login = () => {
           <Button type="primary" htmlType="submit" className="login-form-button">
             Log in
           </Button>
-          Or <a href="">register now!</a>
+          
+          Or <a href="http://localhost:3000/signUp">register now!</a>
         </Form.Item>
       </Form>
+      </div>
+      
     </div>
   );
 };

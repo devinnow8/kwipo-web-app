@@ -28,6 +28,40 @@ export const newUsersDetails = async (User) => {
   data.append("email", User.email);
   data.append("password", User.password);
 
-  const url = "https://kwipo.onrender.com/createuser/";
+  const url =  "https://kwipo.onrender.com/createuser/"
   return await makeApiCall("post", url, data, {});
 };
+
+
+export const loginUsersDetails = async (User) => {
+  let data = new FormData();
+  data.append("email", User.email);
+  data.append("password", User.password);
+  console.log("user", User)
+  console.log("datat", data)
+
+  const url =  "https://kwipo.onrender.com/adminlogin/"
+  return await makeApiCall("post", url, data, {});
+};
+
+// export const loginUsersDetails = async (User) => {
+//   let formData = new FormData();
+//   formData.append("email", User.email);
+//   console.log("iii", User.email);
+  
+//   formData.append("password", User.password);
+//   console.log("user", User);
+//   console.log("datat", formData);
+
+//   const jsonData = {};
+//   for (let [key, value] of formData.entries()) {
+//     jsonData[key] = value;
+//   }
+
+//   console.log("json data", jsonData);
+
+//   const url = "https://kwipo.onrender.com/loginuser/";
+//   return await makeApiCall("post", url, JSON.stringify(jsonData), {});
+// };
+
+
