@@ -1,25 +1,28 @@
 import React, { useState } from "react";
-import "./index.css";
-import { Form, Input, Button, Checkbox, Image, Row, Col } from "antd";
-import { UserOutlined, MailOutlined, LockOutlined } from "@ant-design/icons";
+import { Form, Input, Button, Image, Row, Col } from "antd";
+import { MailOutlined, LockOutlined } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
 import { loginUsersDetails } from "../../API/function";
-import signInImage from "./sign-signin-ca50f83d2f.png";
 import loginImg from "../../Images/login-img.png";
 import kwipologo from "../../Images/kwipologo.png";
 
+import "./index.css";
+import Loader from "../Loader";
 
 const Login = () => {
   const [form] = Form.useForm();
   const navigate = useNavigate();
+
   const [newUser, setNewUser] = useState({ email: "", password: "" });
+  const [isLoading, setIsLoading] = useState(false);
 
-  const handleSubmit = () => {
-    navigate("/main");
-
-    loginUsersDetails(newUser);
+  const handleSubmit = async () => {
+    try {
+      setIsLoading(true);
+      await loginUsersDetails(newUser);
+      navigate("/main");
+    } catch (err) {}
   };
-  console.log("newUser", newUser);
 
   const handleUserData = (e) => {
     const { name, value } = e.target;
@@ -31,13 +34,20 @@ const Login = () => {
 
   return (
     <Row justify="space-between" align="middle" className="login-form">
+      {isLoading && <Loader />}
       <Col span={12} className="login-img">
-        <Image src={loginImg} alt="Sign In" width={500} />
+        <Image src={loginImg} alt="Sign In" width={500} preview={false} />
       </Col>
       <Col span={12}>
         <div className="login-form-content">
           <div justify="center" align="middle">
-            <Image src={kwipologo} alt="logo" width={150} className="logo" />
+            <Image
+              src={kwipologo}
+              alt="logo"
+              width={150}
+              className="logo"
+              preview={false}
+            />
           </div>
           <Form form={form} onFinish={handleSubmit}>
             <Form.Item
@@ -72,9 +82,8 @@ const Login = () => {
                 htmlType="submit"
                 className="login-form-button"
               >
-                Sign-in
+                Login
               </Button>
-              {/* Or <a href="http://localhost:3000/signUp">register now!</a> */}
             </Form.Item>
           </Form>
         </div>

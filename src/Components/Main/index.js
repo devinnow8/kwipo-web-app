@@ -7,14 +7,19 @@ import Message from "./download.jpeg";
 import "./index.css";
 import messageImg from "../../Images/message-img.png";
 import { useNavigate } from "react-router-dom";
+import Loader from "../Loader";
 const { TextArea } = Input;
 
 const Main = () => {
   const [form] = Form.useForm();
+  const navigate = useNavigate();
+
   const [users, setUsers] = useState([]);
   const [selectedUsers, setSelectedUsers] = useState([]);
-const navigate= useNavigate()
+  const [isLoading, setIsLoading] = useState(false);
+
   const fetchData = useCallback(async () => {
+    setIsLoading(true);
     try {
       const res = await getUsers();
       if (res.data) {
@@ -23,31 +28,36 @@ const navigate= useNavigate()
     } catch (err) {
       console.log("err", err);
     }
+    setIsLoading(false);
   }, []);
 
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [fetchData]);
 
   const handleSend = async () => {
+    setIsLoading(true);
     try {
       const values = await form.validateFields();
       await sendMessageNotification(values.message, selectedUsers);
     } catch (error) {
       console.log("Validation error", error);
     }
+    setIsLoading(false);
   };
-const handleLogout =  () => {
-  navigate("/")
-}
+
+  const handleLogout = () => {
+    navigate("/");
+  };
   return (
     <Row justify="space-between" align="middle" className="login-form">
+      {isLoading && <Loader />}
       <Col span={12} className="login-img">
         <Image src={messageImg} alt="Sign Up" width={450} />
       </Col>
       <Col span={12}>
         <div className="login-form-content" style={{ width: "unset" }}>
-        <div justify="center" align="middle">
+          <div justify="center" align="middle">
             <Image src={kwipologo} alt="logo" width={150} className="logo" />
           </div>
           <Form form={form} onFinish={handleSend}>
