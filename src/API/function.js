@@ -12,12 +12,12 @@ export const sendMessageNotification = async (message, selectedUserID) => {
   data.append("my_event", "my_event");
   data.append("message", message);
 
-  const url = "https://kwipo.onrender.com/notify/";
+  const url = "https://kwipo.onrender.com/notify/notification/";
   return await makeApiCall("post", url, data, {});
 };
 
 export const getUsers = async () => {
-  const url = "https://kwipo.onrender.com/listuser/";
+  const url = "https://kwipo.onrender.com/auth/listuser/";
   return await makeApiCall("get", url);
 };
 
@@ -27,7 +27,7 @@ export const newUsersDetails = async (User) => {
   data.append("email", User.email);
   data.append("password", User.password);
 
-  const url = "https://kwipo.onrender.com/createuser/";
+  const url = "https://kwipo.onrender.com/auth/createuser/";
   return await makeApiCall("post", url, data, {});
 };
 
@@ -38,6 +38,6 @@ export const loginUsersDetails = async (User) => {
   console.log("user", User);
   console.log("datat", data);
 
-  const url = "https://kwipo.onrender.com/adminlogin/";
+  const url = "https://kwipo.onrender.com/auth/adminlogin/";
   return await makeApiCall("post", url, data, {});
 };
