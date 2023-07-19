@@ -2,10 +2,9 @@ import React, { useState, useEffect, useCallback } from "react";
 import { Form, Input, Button, Image, Row, Col } from "antd";
 import { sendMessageNotification, getUsers } from "../../API/function";
 import Multiselect from "multiselect-react-dropdown";
-import kwipologo from "../../Images/kwipologo.png";
-import Message from "./download.jpeg";
+import kwipologo from "../../Components/Assets/Images/kwipologo.png"
 import "./index.css";
-import messageImg from "../../Images/message-img.png";
+import messageImg from "../../Components/Assets/Images/message-img.png"
 import { useNavigate } from "react-router-dom";
 import Loader from "../Loader";
 const { TextArea } = Input;

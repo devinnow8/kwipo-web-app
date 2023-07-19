@@ -3,8 +3,8 @@ import { Form, Input, Button, Image, Row, Col } from "antd";
 import { MailOutlined, LockOutlined } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
 import { loginUsersDetails } from "../../API/function";
-import loginImg from "../../Images/login-img.png";
-import kwipologo from "../../Images/kwipologo.png";
+import loginImg from "../../Components/Assets/Images/login-img.png";
+import kwipologo from "../../Components/Assets/Images/kwipologo.png";
 
 import "./index.css";
 import Loader from "../Loader";
